@@ -1,15 +1,18 @@
-import React, {useEffect} from 'react';
-import {View, Text} from 'react-native';
-import movieDB from '../api/movieDB';
-import {NOW_PLAYING_PATH} from '../constant/path';
-import {MovieDBNowPlaying} from '../interfaces/movieInterface';
+import React from 'react';
+import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
+import {useMovies} from '../hooks/useMovies';
+import {colors} from '../theme/appTheme';
 
 export const HomeScreen = () => {
-  useEffect(() => {
-    movieDB
-      .get<MovieDBNowPlaying>(NOW_PLAYING_PATH)
-      .then(resp => console.log(resp.data.results[0].original_title));
-  }, []);
+  const {isLoading} = useMovies();
+
+  if (isLoading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator color={colors.red} size={100} />
+      </View>
+    );
+  }
 
   return (
     <View>
@@ -17,3 +20,11 @@ export const HomeScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+  },
+});
