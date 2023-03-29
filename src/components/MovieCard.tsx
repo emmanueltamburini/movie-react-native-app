@@ -7,7 +7,7 @@ interface Props {
   movie: Movie;
 }
 
-export const MovieComponent = ({movie}: Props) => {
+export const MovieCard = ({movie}: Props) => {
   return (
     <View style={currentStyles.container}>
       <View style={currentStyles.imageContainer}>
