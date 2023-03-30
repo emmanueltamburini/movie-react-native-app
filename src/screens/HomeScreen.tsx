@@ -7,7 +7,7 @@ import {MovieListSlider} from '../components/MovieListSlider';
 import {MovieListCarousel} from '../components/MovieListCarousel';
 
 export const HomeScreen = () => {
-  const {isLoading, nowPlayingMovies} = useMovies();
+  const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
   const insets = useSafeAreaInsets();
   const currentStyles = currentStylesFunction(insets);
 
@@ -22,9 +22,11 @@ export const HomeScreen = () => {
   return (
     <ScrollView>
       <View style={currentStyles.container}>
-        <MovieListCarousel movies={nowPlayingMovies} />
+        <MovieListCarousel movies={nowPlaying} />
 
-        <MovieListSlider movies={nowPlayingMovies} title="En cines" />
+        <MovieListSlider movies={popular} title="Popular" />
+        <MovieListSlider movies={topRated} title="Top Rated" />
+        <MovieListSlider movies={upcoming} title="Upcoming" />
       </View>
     </ScrollView>
   );

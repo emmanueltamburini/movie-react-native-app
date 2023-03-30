@@ -46,7 +46,7 @@ const currentStylesFunction = (
       },
       shadowOpacity: 0.24,
       shadowRadius: 7,
-      elevation: 10,
+      elevation: 9,
     },
     image: {
       flex: 1,

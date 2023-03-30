@@ -21,6 +21,7 @@ export const MovieListCarousel = ({movies}: Props) => {
         sliderWidth={windowWith}
         itemWidth={300}
         keyExtractor={(_, index) => `_key${index.toString()}`}
+        inactiveSlideOpacity={0.95}
       />
     </View>
   );

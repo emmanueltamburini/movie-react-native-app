@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
 import {MovieCard} from './MovieCard';
+import {colors} from '../theme/appTheme';
 
 interface Props {
   title?: string;
@@ -37,6 +38,7 @@ const currentStylesFunction = (title?: string) =>
     title: {
       fontSize: 20,
       fontWeight: 'bold',
+      color: colors.black,
     },
     flatListContainer: {
       height: title ? 260 : 240,
