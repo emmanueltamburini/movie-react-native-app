@@ -1,11 +1,18 @@
 import React from 'react';
-import {View, ActivityIndicator, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  ActivityIndicator,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {useMovies} from '../hooks/useMovies';
 import {colors} from '../theme/appTheme';
 import {MovieCard} from '../components/MovieCard';
 import {EdgeInsets, useSafeAreaInsets} from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 import {Movie} from '../interfaces/movieInterface';
+import {MovieListSlider} from '../components/MovieListSlider';
 
 const {width: windowWith} = Dimensions.get('window');
 
@@ -23,19 +30,22 @@ export const HomeScreen = () => {
   }
 
   return (
-    <View style={currentStyles.container}>
-      <View style={currentStyles.carouselContainer}>
-        <Carousel
-          data={nowPlayingMovies}
-          renderItem={({item}: {item: Movie; index: number}): JSX.Element => (
-            <MovieCard movie={item} />
-          )}
-          sliderWidth={windowWith}
-          itemWidth={300}
-          keyExtractor={(_, index) => `_key${index.toString()}`}
-        />
+    <ScrollView>
+      <View style={currentStyles.container}>
+        <View style={currentStyles.carouselContainer}>
+          <Carousel
+            data={nowPlayingMovies}
+            renderItem={({item}: {item: Movie; index: number}): JSX.Element => (
+              <MovieCard movie={item} />
+            )}
+            sliderWidth={windowWith}
+            itemWidth={300}
+            keyExtractor={(_, index) => `_key${index.toString()}`}
+          />
+        </View>
+        <MovieListSlider movies={nowPlayingMovies} title="En cines" />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
