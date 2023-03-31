@@ -1,10 +1,10 @@
 import React from 'react';
-import {View, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
-import {getPathImage} from '../constant/utils';
 import {useNavigation} from '@react-navigation/core';
 import {RootStackParams} from '../navigation/Navigation';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {MoviePicture} from '../components/MoviePicture';
 
 interface Props {
   movie: Movie;
@@ -43,12 +43,7 @@ export const MovieCard = ({
       onPress={() => navigation.navigate('DetailsScreen', movie)}
       activeOpacity={0.8}
       style={currentStyles.container}>
-      <View style={currentStyles.imageContainer}>
-        <Image
-          source={{uri: getPathImage(movie.poster_path)}}
-          style={currentStyles.image}
-        />
-      </View>
+      <MoviePicture movie={movie} />
     </TouchableOpacity>
   );
 };
