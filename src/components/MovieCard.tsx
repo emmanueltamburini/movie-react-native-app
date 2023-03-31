@@ -11,6 +11,8 @@ interface Props {
   height?: number;
   width?: number;
   marginHorizontal?: number;
+  paddingBottom?: number;
+  paddingHorizontal?: number;
 }
 
 type HomeScreenNavigationProp = StackNavigationProp<
@@ -18,8 +20,21 @@ type HomeScreenNavigationProp = StackNavigationProp<
   'HomeScreen'
 >;
 
-export const MovieCard = ({movie, height, width, marginHorizontal}: Props) => {
-  const currentStyles = currentStylesFunction(height, width, marginHorizontal);
+export const MovieCard = ({
+  movie,
+  height,
+  width,
+  marginHorizontal,
+  paddingBottom,
+  paddingHorizontal,
+}: Props) => {
+  const currentStyles = currentStylesFunction(
+    height,
+    width,
+    marginHorizontal,
+    paddingBottom,
+    paddingHorizontal,
+  );
 
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
@@ -42,12 +57,16 @@ const currentStylesFunction = (
   height?: number,
   width?: number,
   marginHorizontal?: number,
+  paddingBottom?: number,
+  paddingHorizontal?: number,
 ) =>
   StyleSheet.create({
     container: {
       width: width ? width : 300,
       height: height ? height : 420,
       marginHorizontal: marginHorizontal ? marginHorizontal : 0,
+      paddingBottom: paddingBottom ? paddingBottom : 0,
+      paddingHorizontal: paddingHorizontal ? paddingHorizontal : 0,
     },
     imageContainer: {
       flex: 1,

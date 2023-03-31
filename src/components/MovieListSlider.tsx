@@ -24,7 +24,9 @@ export const MovieListSlider = ({movies, title}: Props) => {
             movie={item}
             height={200}
             width={140}
-            marginHorizontal={8}
+            marginHorizontal={2}
+            paddingBottom={20}
+            paddingHorizontal={7}
           />
         )}
         keyExtractor={(_, index) => `_key${index.toString()}`}
