@@ -3,8 +3,14 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from '../screens/HomeScreen';
 import {DetailsScreen} from '../screens/DetailsScreen';
 import {colors} from '../theme/appTheme';
+import {Movie} from '../interfaces/movieInterface';
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  HomeScreen: undefined;
+  DetailsScreen: Movie;
+};
+
+const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
   return (
