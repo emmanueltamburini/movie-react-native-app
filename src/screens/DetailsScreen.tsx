@@ -23,29 +23,29 @@ export const DetailsScreen = ({route}: Props) => {
 
   const {isLoading, cast, movieDetails} = useMoviesDetails({movieID: movie.id});
 
-  console.log(isLoading, cast, movieDetails);
-
   return (
-    <ScrollView style={styles.container}>
-      <MoviePicture
-        movie={movie}
-        imageContainer={styles.imageContainer}
-        imageStyle={styles.imageStyle}
-      />
-      <View style={styles.titleContainer}>
-        <Text style={styles.subTitle}>{movie.original_title}</Text>
-        <Text style={styles.title}>{movie.title}</Text>
-      </View>
-      {isLoading || !movieDetails ? (
-        <ActivityIndicator
-          size={30}
-          color={colors.gray}
-          style={styles.loadingContainer}
+    <View style={styles.container}>
+      <ScrollView>
+        <MoviePicture
+          movie={movie}
+          imageContainer={styles.imageContainer}
+          imageStyle={styles.imageStyle}
         />
-      ) : (
-        <MovieDetails movieDetails={movieDetails} cast={cast} />
-      )}
-    </ScrollView>
+        <View style={styles.titleContainer}>
+          <Text style={styles.subTitle}>{movie.original_title}</Text>
+          <Text style={styles.title}>{movie.title}</Text>
+        </View>
+        {isLoading || !movieDetails ? (
+          <ActivityIndicator
+            size={30}
+            color={colors.gray}
+            style={styles.loadingContainer}
+          />
+        ) : (
+          <MovieDetails movieDetails={movieDetails} cast={cast} />
+        )}
+      </ScrollView>
+    </View>
   );
 };
 

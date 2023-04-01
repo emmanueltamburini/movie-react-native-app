@@ -4,6 +4,7 @@ import {HomeScreen} from '../screens/HomeScreen';
 import {DetailsScreen} from '../screens/DetailsScreen';
 import {colors} from '../theme/appTheme';
 import {Movie} from '../interfaces/movieInterface';
+import {StyleSheet} from 'react-native';
 
 export type RootStackParams = {
   HomeScreen: undefined;
@@ -22,12 +23,19 @@ export const Navigation = () => {
           elevation: 0,
           shadowColor: 'transparent',
         },
-        cardStyle: {
-          backgroundColor: colors.white,
-        },
       }}>
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
+      <Stack.Screen
+        name="HomeScreen"
+        options={{cardStyle: styles.homeScreen}}
+        component={HomeScreen}
+      />
       <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
     </Stack.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  homeScreen: {
+    backgroundColor: colors.white,
+  },
+});

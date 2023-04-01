@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, FlatList} from 'react-native';
 import {MovieDetailsInterface} from '../interfaces/movieDetailsInterface';
 import {Cast} from '../interfaces/movieCreditsInterface';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../theme/appTheme';
-import currencyFormatter from 'currency-formatter'
+import currencyFormatter from 'currency-formatter';
+import {ActorItem} from './ActorItem';
 
 interface Props {
   movieDetails: MovieDetailsInterface;
@@ -29,6 +30,17 @@ export const MovieDetails = ({movieDetails, cast}: Props) => {
         <Text style={styles.budgetText}>
           {currencyFormatter.format(movieDetails.budget, {code: 'USD'})}
         </Text>
+        <Text style={styles.titleText}>Cast</Text>
+        <FlatList
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          data={cast}
+          renderItem={({item}: {item: Cast; index: number}): JSX.Element => (
+            <ActorItem actor={item} />
+          )}
+          keyExtractor={(_, index) => `_key${index.toString()}`}
+          style={styles.flatList}
+        />
       </View>
     </View>
   );
@@ -37,6 +49,7 @@ export const MovieDetails = ({movieDetails, cast}: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginBottom: 20,
   },
   basicInfoContainer: {
     marginHorizontal: 20,
@@ -54,5 +67,9 @@ const styles = StyleSheet.create({
   },
   budgetText: {
     fontSize: 18,
+  },
+  flatList: {
+    marginTop: 10,
+    height: 90,
   },
 });

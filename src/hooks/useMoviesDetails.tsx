@@ -41,8 +41,6 @@ export const useMoviesDetails = ({movieID}: Props) => {
       cast: response[1].data.cast,
     });
 
-    console.log(response[0].data);
-
     setIsLoading(false);
   };
 
