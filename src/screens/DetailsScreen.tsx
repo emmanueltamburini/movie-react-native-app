@@ -5,6 +5,7 @@ import {RootStackParams} from '../navigation/Navigation';
 import {MoviePicture} from '../components/MoviePicture';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../theme/appTheme';
+import {useMoviesDetails} from '../hooks/useMoviesDetails';
 
 const screenDimensions = Dimensions.get('screen');
 
@@ -12,6 +13,11 @@ interface Props extends StackScreenProps<RootStackParams, 'DetailsScreen'> {}
 
 export const DetailsScreen = ({route}: Props) => {
   const movie = route.params;
+
+  const {isLoading, cast, movieDetails} = useMoviesDetails({movieID: movie.id});
+
+  console.log(isLoading, cast, movieDetails);
+
   return (
     <ScrollView style={styles.container}>
       <MoviePicture
