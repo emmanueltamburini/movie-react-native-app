@@ -3,6 +3,8 @@ import {StyleSheet, Dimensions, ScrollView, Text, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigation/Navigation';
 import {MoviePicture} from '../components/MoviePicture';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {colors} from '../theme/appTheme';
 
 const screenDimensions = Dimensions.get('screen');
 
@@ -20,6 +22,9 @@ export const DetailsScreen = ({route}: Props) => {
       <View style={styles.titleContainer}>
         <Text style={styles.subTitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
+      </View>
+      <View style={styles.titleContainer}>
+        <Icon name="airplane-outline" color={colors.gray} size={20} />
       </View>
     </ScrollView>
   );
