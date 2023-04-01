@@ -1,11 +1,18 @@
 import React from 'react';
-import {StyleSheet, Dimensions, ScrollView, Text, View} from 'react-native';
+import {
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigation/Navigation';
 import {MoviePicture} from '../components/MoviePicture';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {colors} from '../theme/appTheme';
 import {useMoviesDetails} from '../hooks/useMoviesDetails';
+import {MovieDetails} from '../components/MovieDetails';
 
 const screenDimensions = Dimensions.get('screen');
 
@@ -29,9 +36,15 @@ export const DetailsScreen = ({route}: Props) => {
         <Text style={styles.subTitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
       </View>
-      <View style={styles.titleContainer}>
-        <Icon name="airplane-outline" color={colors.gray} size={20} />
-      </View>
+      {isLoading || !movieDetails ? (
+        <ActivityIndicator
+          size={30}
+          color={colors.gray}
+          style={styles.loadingContainer}
+        />
+      ) : (
+        <MovieDetails movieDetails={movieDetails} cast={cast} />
+      )}
     </ScrollView>
   );
 };
@@ -52,6 +65,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.24,
     shadowRadius: 7,
     elevation: 9,
+  },
+  loadingContainer: {
+    marginTop: 20,
   },
   imageStyle: {
     flex: 1,
