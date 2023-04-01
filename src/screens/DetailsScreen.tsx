@@ -13,39 +13,45 @@ import {MoviePicture} from '../components/MoviePicture';
 import {colors} from '../theme/appTheme';
 import {useMoviesDetails} from '../hooks/useMoviesDetails';
 import {MovieDetails} from '../components/MovieDetails';
+import {TouchableIcon} from '../components/TouchableIcon';
 
 const screenDimensions = Dimensions.get('screen');
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailsScreen'> {}
 
-export const DetailsScreen = ({route}: Props) => {
+export const DetailsScreen = ({route, navigation}: Props) => {
   const movie = route.params;
 
   const {isLoading, cast, movieDetails} = useMoviesDetails({movieID: movie.id});
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <MoviePicture
-          movie={movie}
-          imageContainer={styles.imageContainer}
-          imageStyle={styles.imageStyle}
+    <ScrollView style={styles.container}>
+      <MoviePicture
+        movie={movie}
+        imageContainer={styles.imageContainer}
+        imageStyle={styles.imageStyle}
+      />
+      <View style={styles.titleContainer}>
+        <Text style={styles.subTitle}>{movie.original_title}</Text>
+        <Text style={styles.title}>{movie.title}</Text>
+      </View>
+      {isLoading || !movieDetails ? (
+        <ActivityIndicator
+          size={30}
+          color={colors.gray}
+          style={styles.loadingContainer}
         />
-        <View style={styles.titleContainer}>
-          <Text style={styles.subTitle}>{movie.original_title}</Text>
-          <Text style={styles.title}>{movie.title}</Text>
-        </View>
-        {isLoading || !movieDetails ? (
-          <ActivityIndicator
-            size={30}
-            color={colors.gray}
-            style={styles.loadingContainer}
-          />
-        ) : (
-          <MovieDetails movieDetails={movieDetails} cast={cast} />
-        )}
-      </ScrollView>
-    </View>
+      ) : (
+        <MovieDetails movieDetails={movieDetails} cast={cast} />
+      )}
+      <TouchableIcon
+        onPress={() => navigation.pop()}
+        style={styles.backButton}
+        color={colors.white}
+        name="arrow-back-outline"
+        size={40}
+      />
+    </ScrollView>
   );
 };
 
@@ -85,5 +91,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  backButton: {
+    position: 'absolute',
+    zIndex: 10,
+    elevation: 10,
+    top: 10,
+    left: 8,
+    opacity: 0.5,
   },
 });
