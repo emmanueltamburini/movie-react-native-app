@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Image, ViewStyle, ImageStyle} from 'react-native';
 import {Movie} from '../interfaces/movieInterface';
-import {getPathImage} from '../constant/utils';
+import {getPathImage} from '../helpers/utils';
 
 interface Props {
   movie: Movie;

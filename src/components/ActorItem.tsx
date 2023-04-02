@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import {Cast} from '../interfaces/movieCreditsInterface';
-import {getPathImage} from '../constant/utils';
+import {getPathImage} from '../helpers/utils';
 import {colors} from '../theme/appTheme';
 import {DEFAULT_IMAGE_PATH} from '../constant/constant';
 

@@ -3,6 +3,7 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {Movie} from '../interfaces/movieInterface';
 import {MovieCard} from './MovieCard';
+import {getPathImage, getImageColors} from '../helpers/utils';
 
 const {width: windowWith} = Dimensions.get('window');
 
@@ -11,6 +12,14 @@ interface Props {
 }
 
 export const MovieListCarousel = ({movies}: Props) => {
+  const getPosterColors = async (index: number): Promise<void> => {
+    const uri = getPathImage(movies[index].poster_path);
+
+    const [primaryColor, secondaryColor] = await getImageColors(uri);
+
+    console.log(uri, primaryColor, secondaryColor);
+  };
+
   return (
     <View style={currentStyles.carouselContainer}>
       <Carousel
@@ -22,6 +31,7 @@ export const MovieListCarousel = ({movies}: Props) => {
         itemWidth={300}
         keyExtractor={(_, index) => `_key${index.toString()}`}
         inactiveSlideOpacity={0.95}
+        onSnapToItem={index => getPosterColors(index)}
       />
     </View>
   );
