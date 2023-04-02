@@ -5,6 +5,7 @@ import {colors} from '../theme/appTheme';
 import {EdgeInsets, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MovieListSlider} from '../components/MovieListSlider';
 import {MovieListCarousel} from '../components/MovieListCarousel';
+import {GradientBackground} from '../components/GradientBackground';
 
 export const HomeScreen = () => {
   const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
@@ -20,15 +21,16 @@ export const HomeScreen = () => {
   }
 
   return (
-    <ScrollView>
-      <View style={currentStyles.container}>
-        <MovieListCarousel movies={nowPlaying} />
-
-        <MovieListSlider movies={popular} title="Popular" />
-        <MovieListSlider movies={topRated} title="Top Rated" />
-        <MovieListSlider movies={upcoming} title="Upcoming" />
-      </View>
-    </ScrollView>
+    <GradientBackground>
+      <ScrollView>
+        <View style={currentStyles.container}>
+          <MovieListCarousel movies={nowPlaying} />
+          <MovieListSlider movies={popular} title="Popular" />
+          <MovieListSlider movies={topRated} title="Top Rated" />
+          <MovieListSlider movies={upcoming} title="Upcoming" />
+        </View>
+      </ScrollView>
+    </GradientBackground>
   );
 };
 
