@@ -58,9 +58,11 @@ const styles = StyleSheet.create({
   nameText: {
     fontSize: 18,
     fontWeight: 'bold',
+    color: colors.black,
   },
   characterText: {
     fontSize: 16,
     opacity: 0.7,
+    color: colors.black,
   },
 });

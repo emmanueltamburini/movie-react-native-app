@@ -92,10 +92,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   subTitle: {
+    color: colors.black,
     fontSize: 16,
     opacity: 0.8,
   },
   title: {
+    color: colors.black,
     fontSize: 20,
     fontWeight: 'bold',
   },

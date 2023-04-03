@@ -18,8 +18,8 @@ export const MovieDetails = ({movieDetails, cast}: Props) => {
       <View style={styles.basicInfoContainer}>
         <View style={styles.rateContainer}>
           <Icon name="star-outline" color={colors.gray} size={16} />
-          <Text> {movieDetails.vote_average}</Text>
-          <Text>
+          <Text style={styles.text}> {movieDetails.vote_average}</Text>
+          <Text style={styles.text}>
             {' '}
             - {movieDetails.genres.map(gender => gender.name).join(', ')}
           </Text>
@@ -61,15 +61,21 @@ const styles = StyleSheet.create({
     fontSize: 23,
     marginTop: 10,
     fontWeight: 'bold',
+    color: colors.black,
   },
   bodyText: {
     fontSize: 16,
+    color: colors.black,
   },
   budgetText: {
     fontSize: 18,
+    color: colors.black,
   },
   flatList: {
     marginTop: 10,
     height: 90,
+  },
+  text: {
+    color: colors.black,
   },
 });
