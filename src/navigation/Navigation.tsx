@@ -29,13 +29,20 @@ export const Navigation = () => {
         options={{cardStyle: styles.homeScreen}}
         component={HomeScreen}
       />
-      <Stack.Screen name="DetailsScreen" component={DetailsScreen} />
+      <Stack.Screen
+        name="DetailsScreen"
+        options={{cardStyle: styles.detailsScreen}}
+        component={DetailsScreen}
+      />
     </Stack.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
   homeScreen: {
+    backgroundColor: colors.white,
+  },
+  detailsScreen: {
     backgroundColor: colors.white,
   },
 });
