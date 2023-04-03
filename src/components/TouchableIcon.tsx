@@ -8,7 +8,7 @@ interface Props {
   size?: number;
   color?: string;
   onPress?: () => void;
-  style: ViewStyle;
+  style?: ViewStyle;
 }
 
 export const TouchableIcon = ({name, color, size, onPress, style}: Props) => {

@@ -17,6 +17,7 @@ export const useMoviesDetails = ({movieID}: Props) => {
   const id = useRef(movieID);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [failed, setFailed] = useState<boolean>(false);
 
   const [movieDetailsState, setMovieDetailsState] = useState<MovieDefaultState>(
     {cast: [], movieDetails: undefined},
@@ -31,22 +32,30 @@ export const useMoviesDetails = ({movieID}: Props) => {
       CREDITS(id.current),
     );
 
-    const response = await Promise.all([
-      movieDetailsPromise,
-      movieCreditsPromise,
-    ]);
+    try {
+      const response = await Promise.all([
+        movieDetailsPromise,
+        movieCreditsPromise,
+      ]);
 
-    setMovieDetailsState({
-      movieDetails: response[0].data,
-      cast: response[1].data.cast,
-    });
+      if (response[0].status !== 200 || response[1].status !== 200) {
+        throw new Error('Petition does not work');
+      }
 
-    setIsLoading(false);
+      setMovieDetailsState({
+        movieDetails: response[0].data,
+        cast: response[1].data.cast,
+      });
+
+      setIsLoading(false);
+    } catch (error) {
+      setFailed(true);
+    }
   };
 
   useEffect(() => {
     getMovieDetails();
   }, []);
 
-  return {...movieDetailsState, isLoading};
+  return {...movieDetailsState, isLoading, failed};
 };

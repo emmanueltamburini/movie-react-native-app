@@ -14,6 +14,7 @@ import {colors} from '../theme/appTheme';
 import {useMoviesDetails} from '../hooks/useMoviesDetails';
 import {MovieDetails} from '../components/MovieDetails';
 import {TouchableIcon} from '../components/TouchableIcon';
+import {ErrorScreen} from './ErrorScreen';
 
 const screenDimensions = Dimensions.get('screen');
 
@@ -22,7 +23,13 @@ interface Props extends StackScreenProps<RootStackParams, 'DetailsScreen'> {}
 export const DetailsScreen = ({route, navigation}: Props) => {
   const movie = route.params;
 
-  const {isLoading, cast, movieDetails} = useMoviesDetails({movieID: movie.id});
+  const {isLoading, cast, movieDetails, failed} = useMoviesDetails({
+    movieID: movie.id,
+  });
+
+  if (failed) {
+    return <ErrorScreen />;
+  }
 
   return (
     <ScrollView style={styles.container}>

@@ -6,11 +6,17 @@ import {EdgeInsets, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {MovieListSlider} from '../components/MovieListSlider';
 import {MovieListCarousel} from '../components/MovieListCarousel';
 import {GradientBackground} from '../components/GradientBackground';
+import {ErrorScreen} from './ErrorScreen';
 
 export const HomeScreen = () => {
-  const {isLoading, nowPlaying, popular, topRated, upcoming} = useMovies();
+  const {isLoading, nowPlaying, popular, topRated, upcoming, failed} =
+    useMovies();
   const insets = useSafeAreaInsets();
   const currentStyles = currentStylesFunction(insets);
+
+  if (failed) {
+    return <ErrorScreen />;
+  }
 
   if (isLoading) {
     return (
