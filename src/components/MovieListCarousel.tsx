@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {Movie} from '../interfaces/movieInterface';
@@ -14,6 +14,7 @@ interface Props {
 
 export const MovieListCarousel = ({movies}: Props) => {
   const {dispatchColor} = useContext(GradientContext);
+
   const getPosterColors = async (index: number): Promise<void> => {
     const uri = getPathImage(movies[index].poster_path);
 
@@ -24,9 +25,15 @@ export const MovieListCarousel = ({movies}: Props) => {
       primary: primaryColor,
       secondary: secondaryColor,
     });
-
-    console.log(uri, primaryColor, secondaryColor);
   };
+
+  const getPosterColorsStatic = useRef(getPosterColors);
+
+  useEffect(() => {
+    if (movies.length > 0) {
+      getPosterColorsStatic.current(0);
+    }
+  }, [movies.length]);
 
   return (
     <View style={currentStyles.carouselContainer}>

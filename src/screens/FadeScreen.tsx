@@ -10,8 +10,8 @@ export const FadeScreen = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={styles.innerContainer} />
-      <Button title="FadeIn" onPress={fadeIn} />
-      <Button title="FadeOut" onPress={fadeOut} />
+      <Button title="FadeIn" onPress={() => fadeIn()} />
+      <Button title="FadeOut" onPress={() => fadeOut()} />
     </View>
   );
 };
