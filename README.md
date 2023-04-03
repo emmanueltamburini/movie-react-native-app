@@ -1,6 +1,6 @@
-# NavigationApp
+# MovieApp
 
-## NavigationApp README
+## MovieApp README
 
 This application has been designed to keep you informed about the latest movies, as well as their overview and cast.
 
