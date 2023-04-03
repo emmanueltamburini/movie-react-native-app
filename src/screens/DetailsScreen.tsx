@@ -1,11 +1,12 @@
 import React from 'react';
 import {
   StyleSheet,
-  Dimensions,
   ScrollView,
   Text,
   View,
   ActivityIndicator,
+  ScaledSize,
+  useWindowDimensions,
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../navigation/Navigation';
@@ -16,16 +17,17 @@ import {MovieDetails} from '../components/MovieDetails';
 import {TouchableIcon} from '../components/TouchableIcon';
 import {ErrorScreen} from './ErrorScreen';
 
-const screenDimensions = Dimensions.get('screen');
-
 interface Props extends StackScreenProps<RootStackParams, 'DetailsScreen'> {}
 
 export const DetailsScreen = ({route, navigation}: Props) => {
   const movie = route.params;
+  const screenDimensions = useWindowDimensions();
 
   const {isLoading, cast, movieDetails, failed} = useMoviesDetails({
     movieID: movie.id,
   });
+
+  const styles = stylesFunction(screenDimensions);
 
   if (failed) {
     return <ErrorScreen />;
@@ -33,11 +35,13 @@ export const DetailsScreen = ({route, navigation}: Props) => {
 
   return (
     <ScrollView style={styles.container}>
-      <MoviePicture
-        movie={movie}
-        imageContainer={styles.imageContainer}
-        imageStyle={styles.imageStyle}
-      />
+      <View style={styles.imageCenter}>
+        <MoviePicture
+          movie={movie}
+          imageContainer={styles.imageContainer}
+          imageStyle={styles.imageStyle}
+        />
+      </View>
       <View style={styles.titleContainer}>
         <Text style={styles.subTitle}>{movie.original_title}</Text>
         <Text style={styles.title}>{movie.title}</Text>
@@ -62,51 +66,60 @@ export const DetailsScreen = ({route, navigation}: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  imageContainer: {
-    width: '100%',
-    height: screenDimensions.height * 0.7,
-    borderRadius: 18,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 10,
+const stylesFunction = (screenDimensions: ScaledSize) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
     },
-    shadowOpacity: 0.24,
-    shadowRadius: 7,
-    elevation: 9,
-  },
-  loadingContainer: {
-    marginTop: 20,
-  },
-  imageStyle: {
-    flex: 1,
-    borderBottomLeftRadius: 18,
-    borderBottomRightRadius: 18,
-  },
-  titleContainer: {
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
-  subTitle: {
-    color: colors.black,
-    fontSize: 16,
-    opacity: 0.8,
-  },
-  title: {
-    color: colors.black,
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  backButton: {
-    position: 'absolute',
-    zIndex: 10,
-    elevation: 10,
-    top: 10,
-    left: 8,
-    opacity: 0.5,
-  },
-});
+    imageContainer: {
+      width: '100%',
+      height:
+        screenDimensions.width > 600
+          ? screenDimensions.height
+          : screenDimensions.height * 0.7,
+      borderRadius: 18,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 10,
+      },
+      shadowOpacity: 0.24,
+      shadowRadius: 7,
+      elevation: 9,
+      maxWidth: screenDimensions.width > 600 ? 300 : 5000,
+    },
+    loadingContainer: {
+      marginTop: 20,
+    },
+    imageStyle: {
+      flex: 1,
+      borderBottomLeftRadius: 18,
+      borderBottomRightRadius: 18,
+      maxWidth: screenDimensions.width > 600 ? 300 : 5000,
+    },
+    imageCenter: {
+      alignItems: 'center',
+    },
+    titleContainer: {
+      marginHorizontal: 20,
+      marginTop: 20,
+    },
+    subTitle: {
+      color: colors.black,
+      fontSize: 16,
+      opacity: 0.8,
+    },
+    title: {
+      color: colors.black,
+      fontSize: 20,
+      fontWeight: 'bold',
+    },
+    backButton: {
+      position: 'absolute',
+      zIndex: 10,
+      elevation: 10,
+      top: 10,
+      left: 8,
+      opacity: 0.5,
+    },
+  });

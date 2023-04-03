@@ -1,12 +1,10 @@
 import React, {useContext, useEffect, useRef} from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import {View, StyleSheet, useWindowDimensions} from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import {Movie} from '../interfaces/movieInterface';
 import {MovieCard} from './MovieCard';
 import {getPathImage, getImageColors} from '../helpers/utils';
 import {GradientContext} from '../context/GradientContext';
-
-const {width: windowWith} = Dimensions.get('window');
 
 interface Props {
   movies: Movie[];
@@ -14,6 +12,7 @@ interface Props {
 
 export const MovieListCarousel = ({movies}: Props) => {
   const {dispatchColor} = useContext(GradientContext);
+  const {width: windowWith} = useWindowDimensions();
 
   const getPosterColors = async (index: number): Promise<void> => {
     const uri = getPathImage(movies[index].poster_path);
