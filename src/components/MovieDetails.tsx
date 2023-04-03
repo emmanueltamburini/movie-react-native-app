@@ -17,7 +17,7 @@ export const MovieDetails = ({movieDetails, cast}: Props) => {
     <View style={styles.container}>
       <View style={styles.basicInfoContainer}>
         <View style={styles.rateContainer}>
-          <Icon name="star-outline" color={colors.gray} size={16} />
+          <Icon name="star-outline" color={colors.black} size={16} />
           <Text style={styles.text}> {movieDetails.vote_average}</Text>
           <Text style={styles.text}>
             {' '}
