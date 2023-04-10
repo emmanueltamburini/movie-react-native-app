@@ -18,7 +18,7 @@ This project use the following dependencies:
 - [React Navigation - Stack navigator](<https://reactnavigation.org/docs/stack-navigator/>)
 - [The movie DB - API](<https://www.themoviedb.org/?language=es>)
 - [Get shadow](<https://ethercreative.github.io/react-native-shadow-generator/>)
-- [React native snap carousel](<https://github.com/meliorence/react-native-snap-carousel>)
+- [React native snap carousel](<https://github.com/meliorence/react-native-snap-carousel>) (I have to use yarn add apurba-bware/react-native-snap-carousel#5a7f809e921262e4e2f646e8cfc4da85f7bd663d because the other wise is not working well)
 - [React Native Vector Icons](<https://github.com/oblador/react-native-vector-icons>)
 - [Currency Formatter](<https://www.npmjs.com/package/currency-formatter>)
 - [React native linear gradient](<https://github.com/react-native-linear-gradient/react-native-linear-gradient>)
